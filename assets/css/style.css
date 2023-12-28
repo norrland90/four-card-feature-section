@@ -1,0 +1,192 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* CUSTOM PROPERTIES */
+:root {
+  --ff-sans: 'Poppins', sans-serif;
+
+  --fw-light: 200;
+  --fw-normal: 400;
+  --fw-bold: 600;
+
+  --fs-400: 0.9375rem; /* Normally this would probably be 1rem */
+  --fs-500: 1.25rem;
+  --fs-600: 1.625rem;
+  --fs-900: 2.5rem;
+
+  --clr-neutral-100: hsl(0, 0%, 98%);
+  --clr-neutral-400: hsl(229, 6%, 66%);
+  --clr-neutral-900: hsl(234, 12%, 34%);
+
+  /* Could give the colors more descriptive names ("state names"), like "warning", "success", "error" */
+  --clr-cyan: hsl(180, 62%, 55%);
+  --clr-red: hsl(0, 78%, 62%);
+  --clr-blue: hsl(212, 86%, 64%);
+  --clr-orange: hsl(34, 97%, 64%);
+}
+
+/* GENERAL */
+
+/* Best place to put main font related properties instead of in body */
+html {
+  font-family: var(--ff-sans);
+  font-weight: var(--fw-normal);
+  line-height: 1.7;
+  color: var(--clr-neutral-400);
+}
+
+body {
+  margin: 0;
+  padding-block-end: 6rem;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--clr-neutral-900);
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: var(--fs-900);
+  font-weight: var(--fw-light);
+}
+
+h1 span {
+  font-weight: var(--fw-bold);
+}
+
+.wrapper {
+  padding-inline: 2rem;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.wrapper--narrow {
+  max-width: 550px;
+}
+
+/* HEADER */
+
+header {
+  margin-block: 6rem;
+  text-align: center;
+}
+
+header > p {
+  font-size: var(--fs-500);
+}
+
+/* CARDS */
+
+/* Flexbox solution */
+/* .layout-grid {
+  --gap: 2rem;
+
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+} */
+
+/* .col {
+  display: grid;
+  align-items: center;
+  gap: var(--gap);
+} */
+
+/* Grid solution */
+.layout-grid {
+  --gap: 2rem;
+
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-areas:
+    'one'
+    'two'
+    'three'
+    'four';
+  gap: var(--gap);
+}
+
+.layout-grid > * {
+  flex: 1;
+}
+
+.card {
+  --br: 0.35rem;
+
+  padding: 2rem;
+  border-top: var(--br) solid;
+  box-shadow: 0 1rem 1.5rem -0.5rem rgb(0 50 100 / 0.15);
+  border-radius: var(--br);
+
+  /* max-width: 23rem; */
+  /* margin-inline: auto; */
+}
+
+.card:nth-child(1) {
+  grid-area: one;
+}
+
+.card:nth-child(2) {
+  grid-area: two;
+}
+
+.card:nth-child(3) {
+  grid-area: three;
+}
+
+.card:nth-child(4) {
+  grid-area: four;
+}
+
+.card__title {
+  font-size: var(--fs-600);
+  margin: 0;
+}
+
+.card__img {
+  display: block;
+  margin-top: 1rem;
+  margin-left: auto;
+  /* Works with display flex on .card and justify-self: end on img */
+}
+
+.border-teal {
+  border-color: var(--clr-cyan);
+}
+
+.border-red {
+  border-color: var(--clr-red);
+}
+
+.border-orange {
+  border-color: var(--clr-orange);
+}
+
+.border-blue {
+  border-color: var(--clr-blue);
+}
+
+/* Flexbox solution */
+/* @media screen and (max-width: 800px) {
+  .layout-grid {
+    flex-direction: column;
+    max-width: 23rem;
+    margin-inline: auto;
+  }
+} */
+
+/* Grid solution */
+@media screen and (min-width: 900px) {
+  .layout-grid {
+    grid-template-areas:
+      '... two ...'
+      'one two four'
+      'one three four'
+      '... three ...';
+  }
+}
